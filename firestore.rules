@@ -1,0 +1,54 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Función auxiliar para verificar si el usuario está autenticado
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Valida que el documento contenga únicamente los campos permitidos y con los tipos/límites especificados
+    function isValidTask(data) {
+      return data.keys().hasOnly(['title', 'description', 'completed', 'userId', 'createdAt'])
+        && data.title is string
+        && data.title.size() >= 1
+        && data.title.size() <= 120
+        && (data.title.matches('^\\S.*\\S$') || data.title.matches('^\\S$'))
+        && data.description is string
+        && data.description.size() <= 2000
+        && data.completed is bool
+        && data.userId is string
+        && data.createdAt is timestamp;
+    }
+
+    match /tasks/{taskId} {
+      // Lectura: solo el dueño de la tarea
+      allow read: if isAuthenticated()
+        && resource.data.userId == request.auth.uid;
+
+      // Creación: autenticado, userId del emisor, completed en false, createdAt igual a request.time y campos válidos
+      allow create: if isAuthenticated()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.completed == false
+        && request.resource.data.createdAt == request.time
+        && isValidTask(request.resource.data);
+
+      // Actualización: solo el dueño, userId y createdAt inmutables, campos válidos
+      allow update: if isAuthenticated()
+        && resource.data.userId == request.auth.uid
+        && request.resource.data.userId == resource.data.userId
+        && request.resource.data.createdAt == resource.data.createdAt
+        && isValidTask(request.resource.data);
+
+      // Eliminación: solo el dueño de la tarea
+      allow delete: if isAuthenticated()
+        && resource.data.userId == request.auth.uid;
+    }
+
+    // Denegar explícitamente acceso a cualquier otra colección
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

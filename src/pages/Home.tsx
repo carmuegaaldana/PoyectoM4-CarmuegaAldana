@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { FirebaseError } from "firebase/app";
 import { useAuth } from "../hooks/useAuth";
+import { useTasks } from "../hooks/useTasks";
+import TodoForm from "../components/TodoForm";
+import TodoList from "../components/TodoList";
 
 function Home() {
     const { user, logout } = useAuth();
+    const { tasks, loading, error, addTask, editTask, toggleTask, removeTask } = useTasks();
     const [isLoggingOut, setIsLoggingOut] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>("");
 
@@ -28,27 +32,41 @@ function Home() {
     };
 
     return (
-        <div>
-            <h1>¡Bienvenido/a!</h1>
-            <p>
-                Sesión iniciada con: <strong>{user?.email}</strong>
-            </p>
-
-            <div style={{ marginTop: "24px" }}>
-                <button
-                    type="button"
-                    onClick={handleLogout}
-                    disabled={isLoggingOut}
-                >
-                    {isLoggingOut ? "Cerrando sesión..." : "Cerrar sesión"}
-                </button>
-            </div>
-
-            {errorMessage && (
-                <p role="alert" style={{ color: "#d9534f", marginTop: "12px" }}>
-                    {errorMessage}
+        <div style={{ maxWidth: "680px", margin: "0 auto", padding: "16px" }}>
+            <header style={{ borderBottom: "1px solid var(--border)", paddingBottom: "16px", marginBottom: "20px" }}>
+                <h1>¡Bienvenido/a!</h1>
+                <p>
+                    Sesión iniciada con: <strong>{user?.email}</strong>
                 </p>
-            )}
+
+                <div style={{ marginTop: "16px" }}>
+                    <button
+                        type="button"
+                        onClick={handleLogout}
+                        disabled={isLoggingOut}
+                    >
+                        {isLoggingOut ? "Cerrando sesión..." : "Cerrar sesión"}
+                    </button>
+                </div>
+
+                {errorMessage && (
+                    <p role="alert" style={{ color: "#d9534f", marginTop: "12px" }}>
+                        {errorMessage}
+                    </p>
+                )}
+            </header>
+
+            <main>
+                <TodoForm onSubmit={addTask} />
+                <TodoList
+                    tasks={tasks}
+                    loading={loading}
+                    error={error}
+                    onToggle={toggleTask}
+                    onEdit={editTask}
+                    onDelete={removeTask}
+                />
+            </main>
         </div>
     );
 }
