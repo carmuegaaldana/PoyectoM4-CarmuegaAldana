@@ -125,3 +125,32 @@ Para probar el frontend junto con la función serverless de manera local:
    ```
 3. Vercel CLI levantará tanto la aplicación React como el entorno de ejecución de las Serverless Functions en `http://localhost:3000`, enrutando las peticiones a `/api/send-email` directamente a `api/send-email.ts` con acceso a las variables de entorno de `.env`.
 
+
+
+## Pruebas automatizadas
+
+Ejecutar todos los tests una vez:
+
+```bash
+npm run test
+```
+
+Ejecutar en modo interactivo, repitiendo al modificar archivos:
+
+```bash
+npm run test:watch
+```
+
+Las pruebas usan Vitest, React Testing Library, user-event y jsdom.
+Cubren creación y edición con validaciones, estados de carga y error,
+listas vacías, cambios de estado, confirmación de eliminación y envío
+del resumen desde el botón y el servicio HTTP.
+
+Los mocks sustituyen Firebase y las respuestas HTTP por simulaciones
+controladas. No se cargan archivos .env, no se usan credenciales ni se
+hacen solicitudes reales. Estas pruebas no sustituyen las comprobaciones
+de reglas de Firestore, entrega real con SES o funcionamiento en producción.
+
+Antigravity instaló las dependencias de testing, pero su ejecución se
+interrumpió por límite de cuota. La configuración y las pruebas se
+completaron con Codex, revisando los resultados de tests, build y lint.
