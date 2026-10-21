@@ -4,6 +4,7 @@ import { useAuth } from "../hooks/useAuth";
 import { useTasks } from "../hooks/useTasks";
 import TodoForm from "../components/TodoForm";
 import TodoList from "../components/TodoList";
+import SendSummaryButton from "../components/SendSummaryButton";
 
 function Home() {
     const { user, logout } = useAuth();
@@ -54,6 +55,8 @@ function Home() {
                         {errorMessage}
                     </p>
                 )}
+
+                <SendSummaryButton />
             </header>
 
             <main>
