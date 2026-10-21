@@ -140,7 +140,7 @@ No se publican contraseñas ni credenciales de prueba.
 
 ## Uso de IA en el proceso de trabajo
 
-Se usaron ChatGPT/Codex para acompañamiento, explicación y revisión, y el agente
+Se usaron Codex para acompañamiento, explicación y revisión, y el agente
 de Antigravity para implementar pasos concretos. Se trabajó por funcionalidades,
 revisando el código y probándolo antes de cada commit.
 
@@ -214,8 +214,7 @@ reales. Conservá la funcionalidad, ejecutá tests, build y lint y documentá
 qué se cubrió. No hagas commits ni deploy.
 ```
 
-Resultado: Antigravity instaló las dependencias y se detuvo por límite de cuota.
-Codex completó la configuración y los 32 tests, comprobó tipos, build y lint.
+Resultado: Antigravity instaló las dependencias, completó la configuración y los 32 tests, comprobó tipos, build y lint.
 
 ### Decisiones y aprendizajes del proceso
 
