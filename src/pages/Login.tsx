@@ -70,7 +70,7 @@ function Login() {
     };
 
     return (
-        <div>
+        <div className="auth-page">
             <h1>Iniciar sesión</h1>
 
             <form onSubmit={handleSubmit}>

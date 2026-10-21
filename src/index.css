@@ -109,3 +109,61 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+
+/* Layout begins with narrow screens; task actions move alongside on desktop. */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, p, label, strong {
+  overflow-wrap: anywhere;
+}
+
+h1 { line-height: 1.15; }
+
+button, input, textarea { font: inherit; }
+button, a { touch-action: manipulation; }
+button {
+  min-height: 44px;
+  padding: 8px 14px;
+  border: 1px solid var(--accent-border);
+  border-radius: 6px;
+  background: var(--accent-bg);
+  color: var(--text-h);
+  cursor: pointer;
+}
+button:disabled { opacity: 0.6; cursor: default; }
+a { color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+input:not([type="checkbox"]), textarea {
+  min-height: 44px;
+  background: var(--bg);
+  color: var(--text-h);
+}
+
+.auth-page {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+.auth-page form { display: grid; gap: 16px; text-align: left; }
+.auth-page label { display: block; margin-bottom: 6px; }
+.auth-page input {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.tasks-page { width: 100%; max-width: 712px; margin: 0 auto; padding: 16px; }
+.task-row { display: grid; grid-template-columns: 18px minmax(0, 1fr); align-items: start; gap: 12px; }
+.task-content { min-width: 0; }
+.task-actions { grid-column: 2; display: flex; flex-wrap: wrap; gap: 8px; }
+.tasks-page form > div:last-child { flex-wrap: wrap; }
+
+@media (min-width: 640px) {
+  .task-row { grid-template-columns: 18px minmax(0, 1fr) auto; }
+  .task-actions { grid-column: 3; grid-row: 1; }
+}

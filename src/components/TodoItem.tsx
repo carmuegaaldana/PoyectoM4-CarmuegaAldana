@@ -116,7 +116,7 @@ export function TodoItem({ task, onToggle, onEdit, onDelete }: TodoItemProps) {
                 transition: "all 0.2s ease",
             }}
         >
-            <div style={{ display: "flex", alignItems: "flex-start", gap: "12px" }}>
+            <div className="task-row">
                 <input
                     type="checkbox"
                     id={`task-check-${task.id}`}
@@ -126,7 +126,7 @@ export function TodoItem({ task, onToggle, onEdit, onDelete }: TodoItemProps) {
                     style={{ marginTop: "4px", width: "18px", height: "18px", cursor: "pointer" }}
                 />
 
-                <div style={{ flex: 1 }}>
+                <div className="task-content">
                     <label
                         htmlFor={`task-check-${task.id}`}
                         style={{
@@ -157,6 +157,7 @@ export function TodoItem({ task, onToggle, onEdit, onDelete }: TodoItemProps) {
                     <div
                         style={{
                             display: "flex",
+                            flexWrap: "wrap",
                             gap: "12px",
                             alignItems: "center",
                             fontSize: "13px",
@@ -179,7 +180,7 @@ export function TodoItem({ task, onToggle, onEdit, onDelete }: TodoItemProps) {
                     )}
                 </div>
 
-                <div style={{ display: "flex", gap: "8px" }}>
+                <div className="task-actions">
                     <button
                         type="button"
                         onClick={() => setIsEditing(true)}

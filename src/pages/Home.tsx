@@ -33,7 +33,7 @@ function Home() {
     };
 
     return (
-        <div style={{ maxWidth: "680px", margin: "0 auto", padding: "16px" }}>
+        <div className="tasks-page">
             <header style={{ borderBottom: "1px solid var(--border)", paddingBottom: "16px", marginBottom: "20px" }}>
                 <h1>¡Bienvenido/a!</h1>
                 <p>
