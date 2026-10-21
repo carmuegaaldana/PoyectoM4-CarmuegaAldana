@@ -75,7 +75,8 @@ npm run build
 npm run lint
 ```
 
-Los 32 tests usan servicios simulados sin credenciales ni envíos reales.
+Los 35 tests usan servicios simulados sin credenciales ni envíos reales.
+Incluyen carga del registro, bloqueo de envíos duplicados y reintento tras errores.
 Para publicar, configurar las variables en Vercel y ejecutar `npx vercel --prod`.
 `vercel.json` define la compilación y el acceso directo a las rutas de la SPA.
 
