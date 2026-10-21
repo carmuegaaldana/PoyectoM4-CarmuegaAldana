@@ -7,7 +7,13 @@ import PublicRoute from "./routes/PublicRoute";
 
 function App() {
   return (
-    <Routes>
+    <>
+      <header className="app-header">
+        <h1>Gestor de Tareas</h1>
+        <p>Organizá tus pendientes y llevá el control de tu día.</p>
+      </header>
+      <main className="app-content">
+        <Routes>
       <Route
         path="/login"
         element={
@@ -34,7 +40,10 @@ function App() {
       />
       <Route path="/" element={<Navigate to="/tasks" replace />} />
       <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+        </Routes>
+      </main>
+      <footer className="app-footer">Gestor de Tareas - ProyectoM4</footer>
+    </>
   );
 }
 

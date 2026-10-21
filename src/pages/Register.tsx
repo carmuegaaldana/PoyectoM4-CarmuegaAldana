@@ -40,7 +40,7 @@ function Register() {
 
     return (
         <div className="auth-page">
-            <h1>Crear cuenta</h1>
+            <h2>Crear cuenta</h2>
 
             <form onSubmit={handleSubmit}>
                 <div>

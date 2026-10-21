@@ -35,13 +35,11 @@ function Home() {
     return (
         <div className="tasks-page">
             <header style={{ borderBottom: "1px solid var(--border)", paddingBottom: "16px", marginBottom: "20px" }}>
-                <h1>¡Bienvenido/a!</h1>
-                <p>
-                    Sesión iniciada con: <strong>{user?.email}</strong>
-                </p>
-
-                <div style={{ marginTop: "16px" }}>
+                <h2>¡Bienvenido/a!</h2>
+                <div className="session-row">
+                    <p>Sesión iniciada con: <strong>{user?.email}</strong></p>
                     <button
+                        className="logout-button"
                         type="button"
                         onClick={handleLogout}
                         disabled={isLoggingOut}
@@ -59,7 +57,7 @@ function Home() {
                 <SendSummaryButton />
             </header>
 
-            <main>
+            <section aria-label="Gestión de tareas">
                 <TodoForm onSubmit={addTask} />
                 <TodoList
                     tasks={tasks}
@@ -69,7 +67,7 @@ function Home() {
                     onEdit={editTask}
                     onDelete={removeTask}
                 />
-            </main>
+            </section>
         </div>
     );
 }

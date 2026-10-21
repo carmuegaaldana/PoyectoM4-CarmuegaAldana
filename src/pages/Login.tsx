@@ -71,7 +71,7 @@ function Login() {
 
     return (
         <div className="auth-page">
-            <h1>Iniciar sesión</h1>
+            <h2>Iniciar sesión</h2>
 
             <form onSubmit={handleSubmit}>
                 <div>
