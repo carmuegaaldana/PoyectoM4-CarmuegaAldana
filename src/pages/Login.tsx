@@ -1,13 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { FirebaseError } from "firebase/app";
 import { auth } from "../services/firebase";
 
-interface LoginProps {
-    onSwitchToRegister?: () => void;
-}
-
-function Login({ onSwitchToRegister }: LoginProps) {
+function Login() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [errorMessage, setErrorMessage] = useState<string>("");
@@ -116,14 +113,10 @@ function Login({ onSwitchToRegister }: LoginProps) {
                 </p>
             )}
 
-            {onSwitchToRegister && (
-                <p style={{ marginTop: "16px" }}>
-                    ¿No tenés una cuenta?{" "}
-                    <button type="button" onClick={onSwitchToRegister}>
-                        Registrate acá
-                    </button>
-                </p>
-            )}
+            <p style={{ marginTop: "16px" }}>
+                ¿No tenés una cuenta?{" "}
+                <Link to="/register">Registrate acá</Link>
+            </p>
         </div>
     );
 }

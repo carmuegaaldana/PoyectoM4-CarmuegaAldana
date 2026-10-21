@@ -1,58 +1,40 @@
-import { useState } from "react";
-import { useAuth } from "./hooks/useAuth";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Home from "./pages/Home";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import PublicRoute from "./routes/PublicRoute";
 
 function App() {
-  const { user, loading } = useAuth();
-  const [currentView, setCurrentView] = useState<"login" | "register">("login");
-
-  if (loading) {
-    return (
-      <div style={{ padding: "32px", textAlign: "center" }}>
-        <p>Cargando sesión...</p>
-      </div>
-    );
-  }
-
-  if (user) {
-    return <Home />;
-  }
-
   return (
-    <div>
-      <nav style={{ padding: "16px", display: "flex", gap: "8px", justifyContent: "center" }}>
-        <button
-          type="button"
-          onClick={() => setCurrentView("login")}
-          disabled={currentView === "login"}
-        >
-          Iniciar sesión
-        </button>
-        <button
-          type="button"
-          onClick={() => setCurrentView("register")}
-          disabled={currentView === "register"}
-        >
-          Registrarse
-        </button>
-      </nav>
-
-      {currentView === "login" ? (
-        <Login onSwitchToRegister={() => setCurrentView("register")} />
-      ) : (
-        <div>
-          <Register />
-          <p style={{ marginTop: "16px" }}>
-            ¿Ya tenés cuenta?{" "}
-            <button type="button" onClick={() => setCurrentView("login")}>
-              Iniciá sesión acá
-            </button>
-          </p>
-        </div>
-      )}
-    </div>
+    <Routes>
+      <Route
+        path="/login"
+        element={
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        }
+      />
+      <Route
+        path="/tasks"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/" element={<Navigate to="/tasks" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 

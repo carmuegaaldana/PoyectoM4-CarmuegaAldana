@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../services/firebase";
 import { FirebaseError } from "firebase/app";
@@ -67,6 +68,11 @@ function Register() {
 
                 <button type="submit">Registrarse</button>
             </form>
+
+            <p style={{ marginTop: "16px" }}>
+                ¿Ya tenés cuenta?{" "}
+                <Link to="/login">Iniciá sesión acá</Link>
+            </p>
         </div>
     );
 }
